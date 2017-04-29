@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Puissance 4</title>
+
+    <script src="js/initOptionsForm.js"></script>
+    <script src="js/validGame.js"></script>
+    <script src="js/initGame.js"></script>
+    <script src="js/initPlayers.js"></script>
+    <script src="js/play.js"></script>
+
+
+
+    <link rel="stylesheet" href="css/reset.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+
+
+    <div id="header" class="col-xs-12 text-center bg-success">
+
+        <h1>
+            Puissance 4
+        </h1>
+
+    </div>
+
+    <div id="content">
+
+        <div id="options-container" class="col-sm-2">
+
+            <form id="game-options">
+
+                Gravite : <br/>
+                <input type="radio" name="gravity" value="On" checked="checked">n
+                &nbsp; - &nbsp;
+                <input type="radio" name="gravity" value="Off">ff
+                <br class="opt-game">
+
+
+
+                <span class="info-options">Taille de la grille : <br/></span>
+                <select id="grid-size" class="opt-game">
+                    <option value="3"> 3x3 ( Mini )</option>
+                    <option value="4" selected="selected"> 4x4 ( Classic )</option>
+                </select>
+                <br>
+
+                <span class="info-options">Taile de la puissance gagnante:</span>
+                <select id="power-size" class="opt-game">
+                    <option value="3"> 3 ( Mini )</option>
+                    <option value="4" selected="selected"> 4 ( Classic )</option>
+                </select>
+                <br>
+
+
+                <span class="info-options">Joueurs : </span><br/>
+                <select id="players-in" class="opt-game">
+                    <option name="players-in" value="1" selected="selected"> 1 vs Bot </option>
+                    <option name="players-in" value="2"> 1 vs 1 </option>
+                    <!--<option name="players-in" value="2vB"> 2 vs Bot </option>-->
+                    <!--<option name="players-in" value="2v2"> 2 vs 2 </option>-->
+                </select>
+                <br>
+
+                <input type="button" id="submitBtn" class="btn-success" value="Jouer">
+
+            </form>
+
+        </div>
+
+
+        <div id="game-container" class="col-sm-8 text-center">
+            <table id="grid-container"></table>
+        </div>
+
+        <div id="score-container" class="col-sm-2">
+            Classement des joueurs ici
+        </div>
+
+
+    </div>
+
+    <div id="footer" class="col-xs-12">
+        FOOTER
+    </div>
+
+
+
+</body>
+</html>

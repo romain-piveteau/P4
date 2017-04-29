@@ -1,0 +1,59 @@
+#header{
+    background: cadetblue;
+}
+
+
+#content{
+    min-height: 350px;
+}
+
+#score-container{
+    border-right: 2px solid darkgrey;
+}
+
+#game-container{
+    height: 100%;
+    background: #000;
+}
+
+#grid-container{
+    margin: 20px auto 20px auto;
+}
+
+
+
+#grid-container > tr > td {
+    background-color: lightsteelblue;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 100px;
+}
+
+#grid-container > tr > td:hover{
+    background: lightseagreen;
+}
+
+#grid-container{
+    background: #000;
+    border: 1px solid black;
+}
+
+
+#options-container{
+    /*border-left: 2px solid darkgrey;*/
+    text-align: center;
+    /*min-height: 350px;*/
+}
+
+.opt-game{
+    margin-bottom: 33px;
+}
+
+#game-options > input[type="radio"]{
+
+    margin-right: 2px;
+}
+
+#footer{
+    background: darkseagreen;
+}
