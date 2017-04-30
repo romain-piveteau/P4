@@ -22,7 +22,7 @@ var game = {
 
             this.grid[i] = [];
 
-            for ( var j = 0; j < gridSize; j++) {
+            for ( var j = 0; j <= gridSize; j++) {
                 this.grid[i][j] = 0;
             }
         }

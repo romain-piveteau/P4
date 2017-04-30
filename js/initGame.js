@@ -67,7 +67,7 @@ function createDomGame(gSize = false, pSize = false, pIn = false) {
 
         if ( gSize && pSize && pIn ) gRow = document.createElement('tr');
 
-        for (let i = 0; i < gSize; i++) {
+        for (let i = 0; i <= gSize; i++) {
 
             if ( gSize && pSize && pIn ) {
 

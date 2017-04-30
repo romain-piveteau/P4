@@ -14,7 +14,7 @@ function f(){
     for (var i = 5; i < 15; i++) {
         gridSizeOpts = document.createElement('option');
             gridSizeOpts.value = i;
-            gridSizeOpts.textContent = '(' + i + 'x' + i + ')';
+            gridSizeOpts.textContent = '(' + i + 'x' + (i + 1) + ')';
 
         powerSizeOpts = document.createElement('option');
             powerSizeOpts.value = i;

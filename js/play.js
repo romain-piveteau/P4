@@ -14,11 +14,10 @@ function play() {
         var countP2Ver = 0;
         var countP1Diag = 1;
         var countP2Diag = 1;
-
+        var endGame = true;
 
         game.grid.forEach(function (el, index) {
 
-            console.log(window.pSize)
             //------------------------------------- BEGIN BOTTOM-RIGHT DIAG DETECT GAME OVER
 
             for ( let i = 0; i < el.length; i++ ) {
@@ -28,7 +27,7 @@ function play() {
                     let oldIndex = index;
                     let oldI = i;
 
-                    while ( i + 1 < el.length && index + 1 < el.length && game.grid[index + 1][i + 1] === 1 ) {
+                    while ( i + 1 < game.grid.length && index + 1 < game.grid.length && game.grid[index + 1][i + 1] === 1 ) {
 
                         countP1Diag++;
                         index++;
@@ -45,7 +44,7 @@ function play() {
                     i = oldI;
                     index = oldIndex;
 
-                    while ( i + 1 < el.length && index + 1 < el.length && game.grid[index + 1][i + 1] === 2 ) {
+                    while ( i + 1 < game.grid.length && index + 1 < game.grid.length && game.grid[index + 1][i + 1] === 2 ) {
 
                         countP2Diag++;
                         index++;
@@ -65,7 +64,21 @@ function play() {
                     countP2Diag = 1;
 
                 }
+
+                game.grid.forEach(function (el, index) {
+                    for ( let i = 0; i < el.length; i++ ) {
+                        if ( game.grid[index][i] === 0 ) endGame = false;
+                    }
+                });
+
+                if ( endGame ) {
+                    window.pSize = 'Egalite';
+                    return false;
+                }
             }
+
+
+
 
             //------------------------------------- END BOTTOM-RIGHT DIAG DETECT GAME OVER
 
@@ -79,14 +92,13 @@ function play() {
                     let oldIndex = index;
                     let oldI = i;
 
-                    while ( i > 0 && index + 1 < el.length && game.grid[index + 1][i - 1] === 1) {
+                    while ( i > 0 && index + 1 < game.grid.length && game.grid[index + 1][i - 1] === 1) {
 
                         countP1Diag++;
                         index++;
                         i--;
 
                         if ( countP1Diag >= window.pSize ) {
-                            console.log('if ok player 1 --> ' + countP1Diag)
                             window.pSize = ( countP1Diag > countP2Diag ) ? game.players[0].name : game.players[1].name;
                             game.over = true;
                             break;
@@ -97,9 +109,7 @@ function play() {
                     i = oldI;
                     index = oldIndex;
 
-                    while ( i > 0 && index + 1 < el.length && game.grid[index + 1][i - 1] === 2 ) {
-
-                        console.log('Begin p2 while')
+                    while ( i > 0 && index + 1 < game.grid.length && game.grid[index + 1][i - 1] === 2 ) {
 
                         countP2Diag++;
                         index++;
@@ -112,7 +122,6 @@ function play() {
 
                         }
 
-                        console.log('After if');
                     }
 
                     i = oldI;
@@ -129,7 +138,7 @@ function play() {
             //------------------------------------- BEGIN DIAG DETECT GAME OVER
 
             //------------------------------------- BEGIN VERT & HORI DETECT GAME OVER
-            for ( let i = 0; i < el.length; i++ ) {
+            for ( let i = 0; i < el.length - 1; i++ ) {
 
                 countP1Hor = ( el[i] === 1 ) ? countP1Hor + 1 : 0;
                 countP2Hor = ( el[i] === 2 ) ? countP2Hor + 1 : 0;
@@ -151,6 +160,7 @@ function play() {
                 game.over = true;
             }
             else countP1Hor = countP2Hor = countP1Ver = countP2Ver = 0;
+            console.log(el.length, index)
 
         });
 
@@ -202,15 +212,17 @@ function placeCell(e){
     }
 
     if ( game.over ) {
-        alert(window.pSize + ' a rempote la partie');
+        ( window.pSize !== 'Egalite' ) ? alert(window.pSize + ' a remporte la partie'): alert('Egalite');
     }
+
+    game.checkEnd();
+    game.setGravity();
+    game.checkEnd();
+
 
     //------------------------------------------DEBUG DISPLAY GRID
     console.log('--------------------------')
     game.grid.forEach(function (el, index) {
        console.log(el);
     });
-
-
-    game.setGravity();
 }
