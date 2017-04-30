@@ -6,13 +6,41 @@ function initGame(gSize, pSize, pIn) {
     window.totalPlayers = [];
 
     while( pIn > window.totalPlayers.length) {
+
         let player = prompt('Nom du joueur ' + ( window.totalPlayers.length + 1 ) + ' : ');
+        while ( player.length < 3 ) player = prompt('Nom du joueur ' + ( window.totalPlayers.length + 1 ) + ' : ');
         window.totalPlayers.push(player);
-        console.log(pIn)
+
         if ( pIn == 1 ) window.totalPlayers.push('Bot');
     }
+    window.pSize = pSize;
 
     createDomGame(gSize, pSize, pIn);
+
+
+    //-------------------------ONLY FOR MOBILE - DO NOT WORK FOR THE MOMENT
+    // else {
+    //
+    //     var pPrompt = document.createElement('input');
+    //     var pBtn = document.createElement('button');
+    //     pBtn.textContent = 'Go';
+    //     pBtn.onclick = function (e) {
+    //
+    //         window.totalPlayers.push(pPrompt.value);
+    //         console.log(pPrompt.value)
+    //         console.log(window.totalPlayers)
+    //         if (window.totalPlayers > pIn) {
+    //             this.remove();
+    //             pPrompt.remove();
+    //
+    //             createDomGame(gSize, pSize, pIn);
+    //         }
+    //
+    //     };
+    //
+    //     document.getElementById('grid-container').appendChild(pPrompt);
+    //     document.getElementById('grid-container').appendChild(pBtn);
+    // }
 
 }
 
@@ -21,7 +49,11 @@ function createDomGame(gSize = false, pSize = false, pIn = false) {
     if ( !gSize || !pSize || !pIn ) {
         var domCell = document.getElementsByClassName('cell-game');
         var gSize = Math.sqrt(domCell.length);
-        var cellSize = document.getElementById('game-container').clientWidth / ( parseInt(gSize) + 1) + 'px';
+        var tmpCellWidth = document.getElementById('game-container').clientWidth / ( parseInt(gSize) + 1) + 'px';
+        var tmpCellHeight = document.getElementById('game-container').clientHeight / ( parseInt(gSize) + 1) + 'px';
+
+        var cellSize = ( tmpCellWidth <= tmpCellHeight ) ? tmpCellWidth : tmpCellHeight;
+
         var cpt = 0;
     } else {
 

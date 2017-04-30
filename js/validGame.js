@@ -19,7 +19,7 @@ function f() {
         let powerSize = formElToHide[1].value;
         let playersIn = formElToHide[2].value;
 
-        if ( gridSize < powerSize ) {
+        if ( parseInt(gridSize) < parseInt(powerSize) ) {
             infosOpts[1].textContent = 'Taille de grille trop petite pour ca'
             infosOpts[1].style.color = 'red';
             return false;

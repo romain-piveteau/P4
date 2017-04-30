@@ -9,10 +9,11 @@ var game = {
     //-------------------------------GRID INITIALISATION
     grid: [],
 
-    setGrid: function (x, y, p) {
+    placeCell: function (x, y, p) {
         console.log(x, y, p)
-        this.grid[x, y] = p;
+        this.grid[x][y] = p;
     },
+
 
     initGrid: function (gridSize) {
         this.grid = [];
@@ -33,7 +34,9 @@ var game = {
     //-------------------------------PLAYERS INITIALISATION
     players: [],
 
-    setPlayers: function(players){
+    setPlayers: function(players = false){
+
+        if ( !players ) return false;
 
         players.forEach(function (el, index) {
 
