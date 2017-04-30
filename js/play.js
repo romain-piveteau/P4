@@ -4,6 +4,8 @@
 
 function play() {
 
+
+
     game.checkEnd = function () {
 
         var countP1Hor = 0;
@@ -16,7 +18,7 @@ function play() {
 
         game.grid.forEach(function (el, index) {
 
-
+            console.log(window.pSize)
             //------------------------------------- BEGIN BOTTOM-RIGHT DIAG DETECT GAME OVER
 
             for ( let i = 0; i < el.length; i++ ) {
@@ -26,14 +28,13 @@ function play() {
                     let oldIndex = index;
                     let oldI = i;
 
-                    while ( game.grid[index + 1][i + 1] === 1 && i < el.length) {
+                    while ( i + 1 < el.length && index + 1 < el.length && game.grid[index + 1][i + 1] === 1 ) {
 
                         countP1Diag++;
                         index++;
                         i++;
 
-                        if ( countP1Diag >= window.pSize || countP2Diag >= window.pSize ) {
-                            console.log('if ok player 1 --> ' + countP1Diag)
+                        if ( countP1Diag >= window.pSize ) {
                             window.pSize = ( countP1Diag > countP2Diag ) ? game.players[0].name : game.players[1].name;
                             game.over = true;
                             break;
@@ -44,25 +45,18 @@ function play() {
                     i = oldI;
                     index = oldIndex;
 
-                    while ( game.grid[index + 1][i + 1] === 2 && i < el.length) {
-
-                        console.log('Begin p2 while')
+                    while ( i + 1 < el.length && index + 1 < el.length && game.grid[index + 1][i + 1] === 2 ) {
 
                         countP2Diag++;
                         index++;
                         i++;
 
-                        console.log('player 2 --> ' + countP2Diag)
 
-                        if ( countP1Diag >= window.pSize || countP2Diag >= window.pSize ) {
-                            console.log('if ok player 2 --> ' + countP2Diag)
+                        if ( countP2Diag >= window.pSize ) {
                             window.pSize = ( countP1Diag > countP2Diag ) ? game.players[0].name : game.players[1].name;
                             game.over = true;
                             break;
-
                         }
-
-                        console.log('After if');
                     }
 
                     i = oldI;
@@ -74,6 +68,9 @@ function play() {
             }
 
             //------------------------------------- END BOTTOM-RIGHT DIAG DETECT GAME OVER
+
+            if ( game.over ) return ( isNaN(window.pSize) );
+
             //------------------------------------- BEGIN BOTTOM-LEFT DIAG DETECT GAME OVER
             for ( let i = 0; i < el.length; i++ ) {
 
@@ -82,13 +79,13 @@ function play() {
                     let oldIndex = index;
                     let oldI = i;
 
-                    while ( game.grid[index + 1][i - 1] === 1 && i < el.length) {
+                    while ( i > 0 && index + 1 < el.length && game.grid[index + 1][i - 1] === 1) {
 
                         countP1Diag++;
                         index++;
                         i--;
 
-                        if ( countP1Diag >= window.pSize || countP2Diag >= window.pSize ) {
+                        if ( countP1Diag >= window.pSize ) {
                             console.log('if ok player 1 --> ' + countP1Diag)
                             window.pSize = ( countP1Diag > countP2Diag ) ? game.players[0].name : game.players[1].name;
                             game.over = true;
@@ -100,7 +97,7 @@ function play() {
                     i = oldI;
                     index = oldIndex;
 
-                    while ( game.grid[index + 1][i - 1] === 2 && i < el.length) {
+                    while ( i > 0 && index + 1 < el.length && game.grid[index + 1][i - 1] === 2 ) {
 
                         console.log('Begin p2 while')
 
@@ -108,10 +105,7 @@ function play() {
                         index++;
                         i--;
 
-                        console.log('player 2 --> ' + countP2Diag)
-
-                        if ( countP1Diag >= window.pSize || countP2Diag >= window.pSize ) {
-                            console.log('if ok player 2 --> ' + countP2Diag)
+                        if ( countP2Diag >= window.pSize ) {
                             window.pSize = ( countP1Diag > countP2Diag ) ? game.players[0].name : game.players[1].name;
                             game.over = true;
                             break;
@@ -129,10 +123,6 @@ function play() {
                 }
             }
             //------------------------------------- END BOTTOM-LEFT DIAG DETECT GAME OVER
-
-
-
-
 
             if ( game.over ) return ( isNaN(window.pSize) );
 
@@ -204,9 +194,9 @@ function play() {
 
 //------------------------------------CLICK ON CELL FUNCTION
 function placeCell(e){
-    // game.checkEnd();
 
-    if ( !game.over ) {
+    if ( !game.over && !game.checkEnd() ) {
+
         if (game.players[0].isAllowToPlay) game.players[0].play(this);
         else if (game.players[1].isAllowToPlay) game.players[1].play(this);
     }
@@ -215,10 +205,12 @@ function placeCell(e){
         alert(window.pSize + ' a rempote la partie');
     }
 
-
     //------------------------------------------DEBUG DISPLAY GRID
     console.log('--------------------------')
     game.grid.forEach(function (el, index) {
        console.log(el);
     });
+
+
+    game.setGravity();
 }

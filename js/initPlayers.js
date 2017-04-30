@@ -55,6 +55,16 @@ var game = {
             });
         });
         game.players[0].isAllowToPlay = true;
+        gravity();
+        document.getElementsByName('gravity')[0].onchange = function(){
+            game.setGravity();
+            game.checkEnd();
+        };
+        document.getElementsByName('gravity')[1].onchange = function(){
+            game.setGravity();
+            game.checkEnd();
+        };
+
         return play();
     },
 
